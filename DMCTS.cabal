@@ -1,0 +1,62 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 7ca9fd2a415f32f1dd668b985fc6ad08dc8154b1331bc522fe47ffd76a80bb5f
+
+name:           DMCTS
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
+homepage:       https://github.com/joshjet/DMCTS#readme
+bug-reports:    https://github.com/joshjet/DMCTS/issues
+author:         Joshua David Christensen
+maintainer:     u0978248@utah.edu
+copyright:      2021 Joshua David Christensen
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/joshjet/DMCTS
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_DMCTS
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable DMCTS-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_DMCTS
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      DMCTS
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite DMCTS-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_DMCTS
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      DMCTS
+    , base >=4.7 && <5
+  default-language: Haskell2010
