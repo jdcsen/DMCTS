@@ -1,48 +1,35 @@
 name:                DMCTS
-version:             0.1.0.0
-github:              "githubuser/DMCTS"
+version:             0.1.0
+github:              "joshjet/DMCTS"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Joshua David Christensen"
+maintainer:          "u0978248@utah.edu"
+copyright:           "Joshua David Christensen 2021"
 
-extra-source-files:
-- README.md
-- ChangeLog.md
-
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/DMCTS#readme>
+description:         Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 
 dependencies:
 - base >= 4.7 && < 5
+- aws-lambda-haskell-runtime >= 3.0.0
+- aeson
 
 library:
   source-dirs: src
 
 executables:
-  DMCTS-exe:
+  bootstrap:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
     - -threaded
     - -rtsopts
+    - -O2
     - -with-rtsopts=-N
     dependencies:
     - DMCTS
 
-tests:
-  DMCTS-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - DMCTS
+default-extensions:
+  - RecordWildCards
+  - OverloadedLists
+  - OverloadedStrings
+  - DeriveGeneric

@@ -1,6 +1,12 @@
 module Main where
 
-import Lib
+import Aws.Lambda
+import qualified Lib
 
 main :: IO ()
-main = someFunc
+main =
+  runLambdaHaskellRuntime
+    defaultDispatcherOptions
+    (pure ())
+    id
+    (addStandaloneLambdaHandler "handler" Lib.handler)

@@ -4,22 +4,19 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7ca9fd2a415f32f1dd668b985fc6ad08dc8154b1331bc522fe47ffd76a80bb5f
+-- hash: cdaa96a30fa47f2c16d08f0b6f332c9125fab7b489a2c132a0aed1af375da6df
 
 name:           DMCTS
-version:        0.1.0.0
+version:        0.1.0
 description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 homepage:       https://github.com/joshjet/DMCTS#readme
 bug-reports:    https://github.com/joshjet/DMCTS/issues
 author:         Joshua David Christensen
 maintainer:     u0978248@utah.edu
-copyright:      2021 Joshua David Christensen
+copyright:      Joshua David Christensen 2021
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
-extra-source-files:
-    README.md
-    ChangeLog.md
 
 source-repository head
   type: git
@@ -32,31 +29,24 @@ library
       Paths_DMCTS
   hs-source-dirs:
       src
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , aws-lambda-haskell-runtime >=3.0.0
+    , base >=4.7 && <5
   default-language: Haskell2010
 
-executable DMCTS-exe
+executable bootstrap
   main-is: Main.hs
   other-modules:
       Paths_DMCTS
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
   build-depends:
       DMCTS
-    , base >=4.7 && <5
-  default-language: Haskell2010
-
-test-suite DMCTS-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_DMCTS
-  hs-source-dirs:
-      test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      DMCTS
+    , aeson
+    , aws-lambda-haskell-runtime >=3.0.0
     , base >=4.7 && <5
   default-language: Haskell2010
