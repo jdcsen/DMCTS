@@ -22,16 +22,25 @@ executables:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -O2
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -O2
+      - -with-rtsopts=-N
     dependencies:
-    - dmcts-runtime
-    - dmcts-encoding
+      - hspec
+      - dmcts-runtime
+      - dmcts-encoding
+
+tests:
+  spec:
+    defaults: hspec/hspec@master
+    dependencies: dmcts-runtime
 
 default-extensions:
   - RecordWildCards
   - OverloadedLists
   - OverloadedStrings
   - DeriveGeneric
+
+build-tools:
+  - hspec-discover == 2.*

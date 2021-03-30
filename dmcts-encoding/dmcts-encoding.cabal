@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 38cc762f85a61fd72a27847340c3dcce828eec414260e88e60e330f4c0dc0b76
+-- hash: b890dc8765a0f75f7882ef1abda6b847ef50ad971e7ed01b6b34ba344c3a3d7d
 
 name:           dmcts-encoding
 version:        0.1.0
@@ -29,7 +29,25 @@ library
   hs-source-dirs:
       src
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  build-tool-depends:
+      hspec-discover:hspec-discover ==2.*
   build-depends:
       aeson
     , base >=4.7 && <5
   default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_dmcts_encoding
+  hs-source-dirs:
+      test
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , dmcts-encoding
+    , hspec ==2.*
+  default-language: Haskell2010
+  build-tool-depends: hspec-discover:hspec-discover == 2.*

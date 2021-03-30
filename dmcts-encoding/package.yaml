@@ -16,8 +16,16 @@ library:
   source-dirs: src
   exposed-modules: PersonEnc
 
+tests:
+  spec:
+    defaults: hspec/hspec@master
+    dependencies: dmcts-encoding
+
 default-extensions:
   - RecordWildCards
   - OverloadedLists
   - OverloadedStrings
   - DeriveGeneric
+
+build-tools:
+  - hspec-discover == 2.*

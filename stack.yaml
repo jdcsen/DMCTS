@@ -1,8 +1,8 @@
 resolver: lts-16.31
 
 packages:
-- dmcts-runtime
-- dmcts-encoding
+  - dmcts-runtime
+  - dmcts-encoding
 
 extra-deps:
-- aws-lambda-haskell-runtime-4.1.0
+  - aws-lambda-haskell-runtime-4.1.0
