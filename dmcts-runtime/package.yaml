@@ -1,0 +1,37 @@
+name:                dmcts-runtime
+version:             0.1.0
+github:              "joshjet/DMCTS"
+license:             BSD3
+author:              "Joshua David Christensen"
+maintainer:          "u0978248@utah.edu"
+copyright:           "Joshua David Christensen 2021"
+
+description:         Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aws-lambda-haskell-runtime >= 4.1.0
+- aeson
+- dmcts-encoding
+
+library:
+  source-dirs: src
+
+executables:
+  bootstrap:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -O2
+    - -with-rtsopts=-N
+    dependencies:
+    - dmcts-runtime
+    - dmcts-encoding
+
+default-extensions:
+  - RecordWildCards
+  - OverloadedLists
+  - OverloadedStrings
+  - DeriveGeneric

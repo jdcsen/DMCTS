@@ -4,9 +4,9 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cdaa96a30fa47f2c16d08f0b6f332c9125fab7b489a2c132a0aed1af375da6df
+-- hash: 7e43be5c492292b0356a426f62b1ba5c616d2798975a8c2df525a9267cdfd286
 
-name:           DMCTS
+name:           dmcts-runtime
 version:        0.1.0
 description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 homepage:       https://github.com/joshjet/DMCTS#readme
@@ -26,27 +26,29 @@ library
   exposed-modules:
       Lib
   other-modules:
-      Paths_DMCTS
+      Paths_dmcts_runtime
   hs-source-dirs:
       src
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   build-depends:
       aeson
-    , aws-lambda-haskell-runtime >=3.0.0
+    , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , dmcts-encoding
   default-language: Haskell2010
 
 executable bootstrap
   main-is: Main.hs
   other-modules:
-      Paths_DMCTS
+      Paths_dmcts_runtime
   hs-source-dirs:
       app
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
   build-depends:
-      DMCTS
-    , aeson
-    , aws-lambda-haskell-runtime >=3.0.0
+      aeson
+    , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , dmcts-encoding
+    , dmcts-runtime
   default-language: Haskell2010

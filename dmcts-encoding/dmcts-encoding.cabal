@@ -1,0 +1,35 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 38cc762f85a61fd72a27847340c3dcce828eec414260e88e60e330f4c0dc0b76
+
+name:           dmcts-encoding
+version:        0.1.0
+description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
+homepage:       https://github.com/joshjet/DMCTS#readme
+bug-reports:    https://github.com/joshjet/DMCTS/issues
+author:         Joshua David Christensen
+maintainer:     u0978248@utah.edu
+copyright:      Joshua David Christensen 2021
+license:        BSD3
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/joshjet/DMCTS
+
+library
+  exposed-modules:
+      PersonEnc
+  other-modules:
+      Paths_dmcts_encoding
+  hs-source-dirs:
+      src
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+  default-language: Haskell2010
