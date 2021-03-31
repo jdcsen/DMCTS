@@ -4,9 +4,9 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e35a16c5438efa8568007c42594f4e25f7561e261162c42ff019c8f2b6fd05c8
+-- hash: 61e51590ba922236337beec05b7414ddd0b99493f25ef4ba8ed4ff70a2e59189
 
-name:           dmcts-runtime
+name:           dmcts-client
 version:        0.1.0
 description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 homepage:       https://github.com/joshjet/DMCTS#readme
@@ -25,7 +25,7 @@ library
   exposed-modules:
       Lib
   other-modules:
-      Paths_dmcts_runtime
+      Paths_dmcts_client
   hs-source-dirs:
       src
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
@@ -33,7 +33,6 @@ library
       hspec-discover:hspec-discover ==2.*
   build-depends:
       aeson
-    , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
     , dmcts-encoding
   default-language: Haskell2010
@@ -41,7 +40,7 @@ library
 executable bootstrap
   main-is: Main.hs
   other-modules:
-      Paths_dmcts_runtime
+      Paths_dmcts_client
   hs-source-dirs:
       app
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
@@ -50,10 +49,9 @@ executable bootstrap
       hspec-discover:hspec-discover ==2.*
   build-depends:
       aeson
-    , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , dmcts-client
     , dmcts-encoding
-    , dmcts-runtime
     , hspec
   default-language: Haskell2010
 
@@ -61,13 +59,12 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_dmcts_runtime
+      Paths_dmcts_client
   hs-source-dirs:
       test
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   build-depends:
       aeson
-    , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
     , dmcts-encoding
     , dmcts-runtime
