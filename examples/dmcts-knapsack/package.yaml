@@ -1,4 +1,4 @@
-name:                dmcts-client
+name:                dmcts-knapsack
 version:             0.1.0
 github:              "joshjet/DMCTS"
 license:             BSD3
@@ -26,8 +26,8 @@ executables:
       - -O2
       - -with-rtsopts=-N
     dependencies:
+      - dmcts-knapsack
       - hspec
-      - dmcts-client
       - dmcts-encoding
 
 tests:
