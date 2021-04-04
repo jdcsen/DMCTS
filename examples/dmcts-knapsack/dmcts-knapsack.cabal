@@ -1,0 +1,73 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: b105eaee9a85673c74bfa380d53ab91c0d739f2aa03ee38e91960442f316212b
+
+name:           dmcts-knapsack
+version:        0.1.0
+description:    Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
+homepage:       https://github.com/joshjet/DMCTS#readme
+bug-reports:    https://github.com/joshjet/DMCTS/issues
+author:         Joshua David Christensen
+maintainer:     u0978248@utah.edu
+copyright:      Joshua David Christensen 2021
+license:        BSD3
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/joshjet/DMCTS
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_dmcts_knapsack
+  hs-source-dirs:
+      src
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  build-tool-depends:
+      hspec-discover:hspec-discover ==2.*
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , dmcts-encoding
+  default-language: Haskell2010
+
+executable bootstrap
+  main-is: Main.hs
+  other-modules:
+      Paths_dmcts_knapsack
+  hs-source-dirs:
+      app
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
+  build-tool-depends:
+      hspec-discover:hspec-discover ==2.*
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , dmcts-encoding
+    , dmcts-knapsack
+    , hspec
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_dmcts_knapsack
+  hs-source-dirs:
+      test
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , dmcts-encoding
+    , dmcts-runtime
+    , hspec ==2.*
+  default-language: Haskell2010
+  build-tool-depends: hspec-discover:hspec-discover == 2.*
