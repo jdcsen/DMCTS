@@ -2,7 +2,7 @@ FROM lambci/lambda:build-provided
 
 ARG EXECUTABLE_NAME=bootstrap
 ARG STACK_RESOLVER=lts-16.31
-ARG OUTPUT_DIR=/root/output
+ARG OUTPUT_DIR=/opt
 ARG PACKAGER_COMMIT_SHA=6404623b59a4189c17cadeb2c5a2eb96f1a76722
 
 SHELL ["/bin/bash", "--rcfile", "~/.profile", "-c"]
@@ -57,7 +57,7 @@ RUN cp $(stack path --local-install-root)/bin/${EXECUTABLE_NAME} ${OUTPUT_DIR}/$
 # Finally, copying over all custom/extra libraries with the help of aws-lambda-packager
 RUN /root/.local/bin/aws-lambda-packager copy-custom-libraries \
     -l /root/default-libraries \
-    -f /root/output/${EXECUTABLE_NAME} \
-    -o /root/output/lib
+    -f ${OUTPUT_DIR}/${EXECUTABLE_NAME} \
+    -o ${OUTPUT_DIR}/lib
 
 ENTRYPOINT sh

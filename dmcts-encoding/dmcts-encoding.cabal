@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b890dc8765a0f75f7882ef1abda6b847ef50ad971e7ed01b6b34ba344c3a3d7d
+-- hash: 952fd5d24653dec8e1d43f74013918a15b18f280d5af2aac74933490f93a98c0
 
 name:           dmcts-encoding
 version:        0.1.0
@@ -24,6 +24,7 @@ source-repository head
 library
   exposed-modules:
       PersonEnc
+      SearchTree
   other-modules:
       Paths_dmcts_encoding
   hs-source-dirs:

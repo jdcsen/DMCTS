@@ -14,7 +14,9 @@ dependencies:
 
 library:
   source-dirs: src
-  exposed-modules: PersonEnc
+  exposed-modules:
+    - PersonEnc
+    - SearchTree
 
 tests:
   spec:
