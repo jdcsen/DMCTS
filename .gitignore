@@ -2,3 +2,6 @@
 *.swp
 build
 function.zip
+*.swm
+*.swn
+*.swo

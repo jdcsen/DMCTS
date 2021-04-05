@@ -1,5 +1,4 @@
 all:
-	@rm -rf ./build/*
 	DOCKER_BUILDKIT=1 docker build --file Lambda.Dockerfile -t dmcts-runtime-lambda .
-	id=$$(docker create dmcts-runtime-lambda); docker cp $$id:/root/output ./build; docker rm -v $$id
-	cd build/output; zip -r function.zip *
+	docker tag  dmcts-runtime-lambda:latest 544864025547.dkr.ecr.us-west-1.amazonaws.com/dmcts-runtime-lambda:latest
+	docker push 544864025547.dkr.ecr.us-west-1.amazonaws.com/dmcts-runtime-lambda:latest
