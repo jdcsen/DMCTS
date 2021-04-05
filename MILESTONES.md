@@ -3,6 +3,7 @@
 ## Infrastructure/Deployment
 1. Deploy a dummy instance of the runtime to AWS Lambda in order to verify we can run Haskell code.
 	1. Verified through communicating with the runtime through the AWS CLI.
+		1. DONE
 2. Communicate with an AWS Lambda instance in Haskell code.
 	1. Verified by communicating with the dummy instance deployed above
 

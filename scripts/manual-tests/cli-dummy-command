@@ -1,0 +1,6 @@
+#!/bin/sh
+aws lambda invoke \
+	--function dmcts-runtime \
+	--cli-binary-format raw-in-base64-out \
+	--payload file://files/dummy.json  \
+	./files/response.json
