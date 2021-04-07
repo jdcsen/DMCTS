@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eo pipefail
+APIID=$(aws cloudformation describe-stack-resource --stack-name dmcts --logical-resource-id api --query 'StackResourceDetail.PhysicalResourceId' --output text)
+REGION=$(aws configure get region)
+
+echo "Executing POST"
+curl -v -X POST \
+  "https://$APIID.execute-api.$REGION.amazonaws.com/api" \
+  -H 'content-type: application/json' \
+  -d '{ "personName": "Gauss", "personAge": -1 }'

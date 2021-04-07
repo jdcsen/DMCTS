@@ -1,12 +1,15 @@
 module Main where
 
 import Aws.Lambda
+import Lib
 import qualified Lib
 
 main :: IO ()
-main =
+main = do
+  let options = defaultDispatcherOptions
   runLambdaHaskellRuntime
-    defaultDispatcherOptions
+    options
     (pure ())
-    id
-    (addStandaloneLambdaHandler "handler" Lib.handler)
+    id $ do
+      addAPIGatewayHandler "handler" gatewayHandler
+

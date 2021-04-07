@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b105eaee9a85673c74bfa380d53ab91c0d739f2aa03ee38e91960442f316212b
+-- hash: 24a3c0bdea70ef48210955afa121ebfd3509d7482f6f0b3ba8aa6804988173c7
 
 name:           dmcts-knapsack
 version:        0.1.0
@@ -37,7 +37,7 @@ library
     , dmcts-encoding
   default-language: Haskell2010
 
-executable bootstrap
+executable app-specific-code
   main-is: Main.hs
   other-modules:
       Paths_dmcts_knapsack

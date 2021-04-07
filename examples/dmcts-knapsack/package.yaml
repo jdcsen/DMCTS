@@ -17,7 +17,7 @@ library:
   source-dirs: src
 
 executables:
-  bootstrap:
+  app-specific-code:
     main:                Main.hs
     source-dirs:         app
     ghc-options:

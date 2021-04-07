@@ -37,8 +37,15 @@ RUN curl -sSL https://get.haskellstack.org/ | sh
 RUN stack setup --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR}
 
 # Installing common packages so that docker builds are faster
-RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} text bytestring http-client http-types path template-haskell case-insensitive aeson unordered-containers
+# HTTP
+RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} text bytestring http-client http-types
+# JSON
+RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} aeson
+# Testing
+RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} hspec
+# etc (transitive or undetermined).
 
+RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} path case-insensitive unordered-containers
 RUN mkdir /root/lambda-function
 
 COPY . /root/lambda-function/
