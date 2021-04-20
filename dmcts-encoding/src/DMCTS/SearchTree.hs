@@ -3,6 +3,8 @@ module DMCTS.SearchTree where
 import GHC.Generics
 import Data.Aeson
 import Data.Tree
+import Data.List
+
 import System.Random
 
 import DMCTS.Types
@@ -57,12 +59,35 @@ execRequest :: (WeightAble l a w) => l -> DMCTSRequest a -> DMCTSResponse a w
 -- Leaf handler
 execRequest logic DMCTSRequest {method=AvgLeaf, ..} = response
   where
+    -- Build our WeightTree
+    tree = mkWeightTree logic root
+
+    -- Build our random numbers.
     gen = mkStdGen randSeed
-    response = DMCTSResponse {result = weight logic root}
+    -- Use our rand generator to generate a set of starting StdGens
+    (newGen, seeds) = mapAccumL (\g _ -> split g) gen (replicate nSamp ())
+
+    -- Collect our samples
+    (samps, _) = unzip $ zipWith3 sampLeaf (repeat logic) (repeat tree) seeds
+
+    -- Aggregate the responses.
+    response = DMCTSResponse {result = aggregate logic samps}
 
 -- Spine handler
 execRequest logic DMCTSRequest {method=AvgSpine, ..} = response
   where
+    -- Build our WeightTree
+    tree = mkWeightTree logic root
+
+    -- Build our random numbers.
     gen = mkStdGen randSeed
-    response = DMCTSResponse {result = weight logic root}
+    -- Use our rand generator to generate a set of starting StdGens
+    (newGen, seeds) = mapAccumL (\g _ -> split g) gen (replicate nSamp ())
+
+    -- Collect our samples
+    (sampsList, _) = unzip $ zipWith3 sampSpine (repeat logic) (repeat tree) seeds
+    samps = concat sampsList
+
+    -- Aggregate the responses.
+    response = DMCTSResponse {result = aggregate logic samps}
 

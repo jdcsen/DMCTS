@@ -9,6 +9,7 @@ import System.Random
 
 import DMCTS.PersonEnc
 import DMCTS.Types
+import DMCTS.SearchTree
 
 dmctsGatewayHandler ::
   (WeightAble logic label weight) =>
@@ -40,7 +41,7 @@ dmctsHandler ::
 
 -- Handler just calls down to execRequest
 dmctsHandler logic _ req
-    = Left "todo: implement"
+    = Right $ execRequest logic req
 
 
 dummyGatewayHandler ::

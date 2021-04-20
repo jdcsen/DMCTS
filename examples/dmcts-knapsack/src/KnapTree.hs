@@ -9,19 +9,22 @@ import Data.List
 
 import DMCTS.Types
 
-data KnapNodeNR = KnapNodeNR [Integer] Integer deriving (Show, Generic)
+data KnapNode = KnapNode [Integer] Integer deriving (Show, Generic)
 
-instance FromJSON KnapNodeNR
-instance ToJSON KnapNodeNR
+-- Ensure our label data structure can be ser/deser
+instance FromJSON KnapNode
+instance ToJSON KnapNode
 
-data KnapNodeWR = KnapNodeWR [Integer] Integer deriving (Show, Generic)
+-- Create instances of fromJSON and toJSON for our payloads
+instance FromJSON (DMCTSRequest KnapNode)
+instance ToJSON (DMCTSRequest KnapNode)
 
-instance FromJSON KnapNodeWR
-instance ToJSON KnapNodeWR
+instance FromJSON (DMCTSResponse KnapNode Integer)
+instance ToJSON (DMCTSResponse KnapNode Integer)
 
 -- Adds an item to the knapsack, without replacement.
-pickItemNR :: KnapNodeNR -> Int -> KnapNodeNR
-pickItemNR input@(KnapNodeNR options remaining) idx = KnapNodeNR newOptions newRemaining
+pickItemNR :: KnapNode -> Int -> KnapNode
+pickItemNR input@(KnapNode options remaining) idx = KnapNode newOptions newRemaining
   where
     pick = options !! idx
     newRemaining = pick + remaining
@@ -29,27 +32,23 @@ pickItemNR input@(KnapNodeNR options remaining) idx = KnapNodeNR newOptions newR
     newOptions = head ++ drop 1 tail
 
 -- Adds an item to the knapsack, with replacement.
-pickItemWR :: KnapNodeWR -> Int -> KnapNodeWR
-pickItemWR input@(KnapNodeWR options remaining) idx = KnapNodeWR options newRemaining
+pickItemWR :: KnapNode -> Int -> KnapNode
+pickItemWR input@(KnapNode options remaining) idx = KnapNode options newRemaining
   where
     pick = options !! idx
     newRemaining = pick + remaining
 
-data KnapLogicNR = KnapLogicNR
 
+-- Two sets of logic: One for operations with replacement, one for ones without.
 data KnapLogicWR = KnapLogicWR
+instance WeightAble KnapLogicNR KnapNode Integer where
+  weight    _ (KnapNode _ w) = w
+  children  _ node@(KnapNode o w) = scanl pickItemNR node [0..(length o - 1)]
+  aggregate _ weights = floor (toRational (sum weights) / toRational (length weights))
 
-instance WeightAble KnapLogicNR KnapNodeNR Integer where
-  weight _ (KnapNodeNR _ w) = w
-  children _ node@(KnapNodeNR o w) = scanl pickItemNR node [0..(length o - 1)]
+data KnapLogicNR = KnapLogicNR
+instance WeightAble KnapLogicWR KnapNode Integer where
+  weight    _ (KnapNode _ w) = w
+  children  _ node@(KnapNode o w) = scanl pickItemWR node [0..(length o - 1)]
+  aggregate _ weights = floor (toRational (sum weights) / toRational (length weights))
 
-instance WeightAble KnapLogicWR KnapNodeWR Integer where
-  weight _ (KnapNodeWR _ w) = w
-  children _ node@(KnapNodeWR o w) = scanl pickItemWR node [0..(length o - 1)]
-
--- Create instances of fromJSON and toJSON for our payloads
-instance FromJSON (DMCTSRequest KnapNodeNR)
-instance ToJSON (DMCTSRequest KnapNodeNR)
-
-instance FromJSON (DMCTSResponse KnapNodeNR Integer)
-instance ToJSON (DMCTSResponse KnapNodeNR Integer)

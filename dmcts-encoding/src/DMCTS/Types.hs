@@ -15,8 +15,13 @@ import System.Random
 --       hand, being able to specify different weighting functions through combinations
 --       of logic/label types (i.e: logic label -> weight) is pretty enticing.
 --       We'll see if I eventually find a way to work through it.
+--
+-- NOTE: Since aggregation is no longer hardcoded in the runtime, I've removed
+--       the Num restriction on weight. For aggregation functions where we're
+--       looking to find a min/max weight, we could package the label as a part
+--       of the weight.
 class (ToJSON label, FromJSON label,
-       Fractional weight) =>
+       ToJSON weight, FromJSON weight) =>
       WeightAble logic label weight
         | logic -> label weight where
   children  :: logic -> label -> [label]
