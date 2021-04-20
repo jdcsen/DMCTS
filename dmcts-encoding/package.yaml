@@ -9,14 +9,17 @@ copyright:           "Joshua David Christensen 2021"
 description:         Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- aeson
+  - base >= 4.7 && < 5
+  - aeson
+  - containers
+  - random
 
 library:
   source-dirs: src
   exposed-modules:
-    - PersonEnc
-    - SearchTree
+    - DMCTS.Types
+    - DMCTS.PersonEnc
+    - DMCTS.SearchTree
 
 tests:
   spec:

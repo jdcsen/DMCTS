@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e35a16c5438efa8568007c42594f4e25f7561e261162c42ff019c8f2b6fd05c8
+-- hash: c1dc13359e7379b59c835cba0437293dd5a1cbe36cb6c2752cc2dd083c87d48a
 
 name:           dmcts-runtime
 version:        0.1.0
@@ -23,7 +23,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      DMCTS.Runtimes
+      DMCTS.Handlers
   other-modules:
       Paths_dmcts_runtime
   hs-source-dirs:
@@ -36,6 +37,7 @@ library
     , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
     , dmcts-encoding
+    , random
   default-language: Haskell2010
 
 executable bootstrap
@@ -55,6 +57,7 @@ executable bootstrap
     , dmcts-encoding
     , dmcts-runtime
     , hspec
+    , random
   default-language: Haskell2010
 
 test-suite spec
@@ -72,5 +75,6 @@ test-suite spec
     , dmcts-encoding
     , dmcts-runtime
     , hspec ==2.*
+    , random
   default-language: Haskell2010
   build-tool-depends: hspec-discover:hspec-discover == 2.*

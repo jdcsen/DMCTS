@@ -11,10 +11,12 @@
 1. dmcts-runtime
 	1. Application-specific IO
 		1. Threshold: Command and read Monte Carlo Tree semantics from AS Software.
+			1. DONE/OBE: Instead of app-specific I/O, provided a set of handlers that can work on our WeightAble class. Custom runtimes just use the defined handlers.
 	2. Runtime I/O (Might be provided by our base runtime)
 		1. Threshold: Pass a root node to the runtime, get an average node value back.
 		2. Stretch: Multidimensional node values
 		3. Stretch: Use with AWS API Gateway
+			1. DONE (Chosen to simplify client code)
 	3. Monte-Carlo Tree Sampling
 		1. Threshold: Single-instance sampling
 		2. Stretch: Recursive sampling (runtime triggers more runtimes)

@@ -1,4 +1,4 @@
-module PersonEnc where
+module DMCTS.PersonEnc where
 
 import GHC.Generics
 import Data.Aeson

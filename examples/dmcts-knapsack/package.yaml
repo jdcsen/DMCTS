@@ -9,9 +9,11 @@ copyright:           "Joshua David Christensen 2021"
 description:         Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- aeson
-- dmcts-encoding
+  - base >= 4.7 && < 5
+  - aeson
+  - dmcts-encoding
+  - dmcts-runtime
+  - aws-lambda-haskell-runtime >= 4.1.0
 
 library:
   source-dirs: src

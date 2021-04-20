@@ -1,6 +1,17 @@
 module Main where
 
+import qualified System.IO as SIO
+
+import Aws.Lambda
+import DMCTS.Handlers
+
+import KnapTree
 
 main :: IO ()
 main = do
-  putStrLn "Something"
+  let options = defaultDispatcherOptions
+  runLambdaHaskellRuntime
+    options
+    (pure ())
+    id $ do
+      addAPIGatewayHandler "" (dmctsGatewayHandler KnapLogicNR)

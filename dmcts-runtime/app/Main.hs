@@ -1,15 +1,10 @@
 module Main where
 
+import DMCTS.Handlers
+
 import Aws.Lambda
-import Lib
-import qualified Lib
+import DMCTS.Runtimes
 
 main :: IO ()
-main = do
-  let options = defaultDispatcherOptions
-  runLambdaHaskellRuntime
-    options
-    (pure ())
-    id $ do
-      addAPIGatewayHandler "handler" gatewayHandler
+main = dummyRuntime
 

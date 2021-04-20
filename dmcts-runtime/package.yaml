@@ -9,13 +9,17 @@ copyright:           "Joshua David Christensen 2021"
 description:         Please see the README on GitHub at <https://github.com/joshjet/DMCTS#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- aws-lambda-haskell-runtime >= 4.1.0
-- aeson
-- dmcts-encoding
+  - base >= 4.7 && < 5
+  - aws-lambda-haskell-runtime >= 4.1.0
+  - aeson
+  - dmcts-encoding
+  - random
 
 library:
   source-dirs: src
+  exposed-modules:
+    - DMCTS.Runtimes
+    - DMCTS.Handlers
 
 executables:
   bootstrap:

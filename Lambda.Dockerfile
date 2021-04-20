@@ -73,4 +73,3 @@ COPY --from=build ${OUTPUT_DIR} ${OUTPUT_DIR}
 
 WORKDIR "/opt"
 ENTRYPOINT [ "/opt/bootstrap" ]
-CMD [ "handler" ]
