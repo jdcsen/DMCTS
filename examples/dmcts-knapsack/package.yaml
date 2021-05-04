@@ -14,14 +14,19 @@ dependencies:
   - dmcts-encoding
   - dmcts-runtime
   - aws-lambda-haskell-runtime >= 4.1.0
+  - random
+  - optparse-applicative
+  - transformers
+  - criterion
+  - statistics
 
 library:
   source-dirs: src
 
 executables:
-  app-specific-code:
+  dmcts-knapsack-runtime:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         runtime
     ghc-options:
       - -threaded
       - -rtsopts
@@ -32,10 +37,24 @@ executables:
       - hspec
       - dmcts-encoding
 
+  dmcts-knapsack-client:
+    main:                Main.hs
+    source-dirs:         client
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -O2
+      - -with-rtsopts=-N
+    dependencies:
+      - dmcts-knapsack
+      - hspec
+      - dmcts-encoding
+
+
 tests:
   spec:
     defaults: hspec/hspec@master
-    dependencies: dmcts-runtime
+    dependencies: dmcts-knapsack
 
 default-extensions:
   - RecordWildCards

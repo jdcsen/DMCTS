@@ -10,13 +10,14 @@ import System.Random
 import DMCTS.PersonEnc
 import DMCTS.Types
 import DMCTS.SearchTree
+import DMCTS.Requests
 
 dmctsGatewayHandler ::
   (WeightAble logic label weight) =>
   logic ->
   ApiGatewayRequest (DMCTSRequest label) ->
   Context () ->
-  IO (Either (ApiGatewayResponse String) (ApiGatewayResponse (DMCTSResponse label weight)))
+  IO (Either (ApiGatewayResponse String) (ApiGatewayResponse (DMCTSResponse weight)))
 dmctsGatewayHandler logic req ctx
   | isNothing body = return emptBodyResp
   | otherwise      = return succParseResp
@@ -37,11 +38,11 @@ dmctsHandler ::
   logic ->
   Context () ->
   DMCTSRequest label ->
-  Either String (DMCTSResponse label weight)
+  Either String (DMCTSResponse weight)
 
 -- Handler just calls down to execRequest
 dmctsHandler logic _ req
-    = Right $ execRequest logic req
+    = Right $ execDMCTSRequest logic req
 
 
 dummyGatewayHandler ::

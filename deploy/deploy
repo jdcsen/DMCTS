@@ -1,1 +1,3 @@
-aws cloudformation deploy --template-file template.yaml --stack-name dmcts --capabilities CAPABILITY_NAMED_IAM
+#!/bin/sh
+STACK_NAME=$1
+aws cloudformation deploy --template-file $STACK_NAME/template.yaml --stack-name $STACK_NAME --capabilities CAPABILITY_NAMED_IAM

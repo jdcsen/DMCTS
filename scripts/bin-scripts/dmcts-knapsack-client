@@ -1,0 +1,4 @@
+#!/bin/sh
+
+STACK_PATH=`stack path --local-install-root`
+$STACK_PATH/bin/dmcts-knapsack-client $@

@@ -13,6 +13,13 @@ dependencies:
   - aeson
   - containers
   - random
+  - http-client
+  - http-client-tls
+  - http-conduit
+  - transformers
+  - async
+  - bytestring
+  - retry
 
 library:
   source-dirs: src
@@ -20,6 +27,11 @@ library:
     - DMCTS.Types
     - DMCTS.PersonEnc
     - DMCTS.SearchTree
+    - DMCTS.Requests
+    - DMCTS.Random
+    - DMCTS.Client.State
+    - DMCTS.Client.Sampling
+    - DMCTS.Client.Searches
 
 tests:
   spec:

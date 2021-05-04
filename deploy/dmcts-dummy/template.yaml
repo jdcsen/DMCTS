@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: An API Driven dmcts-runtime
+Description: A dummy version of the API Driven dmcts-runtime
 Resources:
   api:
     Type: AWS::Serverless::Api
@@ -11,9 +11,9 @@ Resources:
   runtime:
     Type: AWS::Serverless::Function
     Properties:
-      Description: The DMCTS Runtime
+      Description: The DMCTS Dummy Runtime
       PackageType: Image
-      ImageUri: 544864025547.dkr.ecr.us-west-1.amazonaws.com/dmcts-runtime-lambda:latest-dev
+      ImageUri: 544864025547.dkr.ecr.us-west-1.amazonaws.com/dmcts-dummy-runtime:latest-dev
       Timeout: 10
       # Function's execution role
       Policies:
@@ -28,4 +28,3 @@ Resources:
             RestApiId: !Ref api
             Path: /
             Method: POST
-

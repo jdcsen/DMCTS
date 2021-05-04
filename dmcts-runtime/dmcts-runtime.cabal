@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c1dc13359e7379b59c835cba0437293dd5a1cbe36cb6c2752cc2dd083c87d48a
+-- hash: 0074dfd86bf01d375372b20f2d567d575338d50971032cf6f70692bf072c898d
 
 name:           dmcts-runtime
 version:        0.1.0
@@ -40,7 +40,7 @@ library
     , random
   default-language: Haskell2010
 
-executable bootstrap
+executable dmcts-dummy-lambda
   main-is: Main.hs
   other-modules:
       Paths_dmcts_runtime
@@ -64,6 +64,8 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      DMCTS.HandlersSpec
+      DMCTS.RuntimesSpec
       Paths_dmcts_runtime
   hs-source-dirs:
       test

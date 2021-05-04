@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eo pipefail
+APIID=$(aws cloudformation describe-stack-resource --stack-name dmcts-knapsack --logical-resource-id api --query 'StackResourceDetail.PhysicalResourceId' --output text)
+REGION=$(aws configure get region)
+
+echo "Executing POST"
+curl -v \
+  "https://$APIID.execute-api.$REGION.amazonaws.com/api/DMCTS" \
+  -H 'content-type: application/json' \
+  --data '@files/knapsack-dmcts-request.json'
+

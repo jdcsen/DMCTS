@@ -22,7 +22,7 @@ library:
     - DMCTS.Handlers
 
 executables:
-  bootstrap:
+  dmcts-dummy-lambda:
     main:                Main.hs
     source-dirs:         app
     ghc-options:

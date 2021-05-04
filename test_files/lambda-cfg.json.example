@@ -1,0 +1,4 @@
+{
+	"url":"https://api-endpoint-url/api/DMCTS",
+	"sampsPerLambda":5000
+}

@@ -1,4 +1,3 @@
-ARG EXECUTABLE_NAME=bootstrap
 ARG STACK_RESOLVER=lts-16.31
 ARG OUTPUT_DIR=/opt
 
@@ -38,7 +37,7 @@ RUN stack setup --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR}
 
 # Installing common packages so that docker builds are faster
 # HTTP
-RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} text bytestring http-client http-types
+RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} text bytestring http-client-tls http-types
 # JSON
 RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} aeson
 # Testing
@@ -46,15 +45,14 @@ RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} hs
 # etc (transitive or undetermined).
 
 RUN stack install --resolver=${STACK_RESOLVER} --local-bin-path=${OUTPUT_DIR} path case-insensitive unordered-containers
-RUN mkdir /root/lambda-function
 
-COPY . /root/lambda-function/
-
-RUN pwd
+# Build Stage
+# NOTE: Moving this from a global to a scoped ARG violates DRY, but allows us to cache all prior images for different targets.
+ARG EXECUTABLE_NAME=bootstrap
 
 # Building the lambda-function and copying it to the output directory
-RUN cd /root/lambda-function
-WORKDIR /root/lambda-function/
+WORKDIR /root/lambda-function-build/
+COPY . /root/lambda-function-build/
 RUN ls
 RUN stack clean --full --local-bin-path=${OUTPUT_DIR}
 RUN stack build --fast --local-bin-path=${OUTPUT_DIR}
@@ -62,11 +60,12 @@ RUN stack build --fast --local-bin-path=${OUTPUT_DIR}
 RUN mkdir -p ${OUTPUT_DIR} && \
     mkdir -p ${OUTPUT_DIR}/lib
 
-RUN cp $(stack path --local-install-root)/bin/${EXECUTABLE_NAME} ${OUTPUT_DIR}/${EXECUTABLE_NAME}
+RUN cp $(stack path --local-install-root)/bin/${EXECUTABLE_NAME} /opt/bootstrap
 
-FROM  amazon/aws-lambda-provided:al2 as run
+# Use a multi-stage build to cut down on deployed image size.
+FROM amazon/aws-lambda-provided:al2 as run
 
-ARG EXECUTABLE_NAME
+ARG EXECUTABLE_NAME=bootstrap
 ARG OUTPUT_DIR
 
 COPY --from=build ${OUTPUT_DIR} ${OUTPUT_DIR}

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e677b3d59abc41541d435ffe1e9707a0fa149fefca21945f81eeb6650b108821
+-- hash: 0649255e9ee0e621e3ff920b392ba4618731e2049fdc4032c53e01c2b4eb73ec
 
 name:           dmcts-encoding
 version:        0.1.0
@@ -26,6 +26,11 @@ library
       DMCTS.Types
       DMCTS.PersonEnc
       DMCTS.SearchTree
+      DMCTS.Requests
+      DMCTS.Random
+      DMCTS.Client.State
+      DMCTS.Client.Sampling
+      DMCTS.Client.Searches
   other-modules:
       Paths_dmcts_encoding
   hs-source-dirs:
@@ -35,25 +40,44 @@ library
       hspec-discover:hspec-discover ==2.*
   build-depends:
       aeson
+    , async
     , base >=4.7 && <5
+    , bytestring
     , containers
+    , http-client
+    , http-client-tls
+    , http-conduit
     , random
+    , retry
+    , transformers
   default-language: Haskell2010
 
 test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      DMCTS.ClientSpec
+      DMCTS.RequestsSpec
+      DMCTS.SearchTreeSpec
+      DMCTS.TypesSpec
+      Dummies
       Paths_dmcts_encoding
   hs-source-dirs:
       test
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   build-depends:
       aeson
+    , async
     , base >=4.7 && <5
+    , bytestring
     , containers
     , dmcts-encoding
     , hspec ==2.*
+    , http-client
+    , http-client-tls
+    , http-conduit
     , random
+    , retry
+    , transformers
   default-language: Haskell2010
   build-tool-depends: hspec-discover:hspec-discover == 2.*

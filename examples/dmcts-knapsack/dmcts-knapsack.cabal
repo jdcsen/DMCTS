@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a329934829e03716b6cfff6f1146633c2d77a054551636e8e658394f2d27daa3
+-- hash: b8befccb6fe6c3810932956fc53df901c950f13e044631d86cb1f79e1a78f8d7
 
 name:           dmcts-knapsack
 version:        0.1.0
@@ -23,8 +23,8 @@ source-repository head
 
 library
   exposed-modules:
-      KnapTree
-      Lib
+      DMCTSKnapsack.KnapTree
+      DMCTSKnapsack.Parsers
   other-modules:
       Paths_dmcts_knapsack
   hs-source-dirs:
@@ -36,16 +36,21 @@ library
       aeson
     , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , criterion
     , dmcts-encoding
     , dmcts-runtime
+    , optparse-applicative
+    , random
+    , statistics
+    , transformers
   default-language: Haskell2010
 
-executable app-specific-code
+executable dmcts-knapsack-client
   main-is: Main.hs
   other-modules:
       Paths_dmcts_knapsack
   hs-source-dirs:
-      app
+      client
   default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
   ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
   build-tool-depends:
@@ -54,16 +59,49 @@ executable app-specific-code
       aeson
     , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , criterion
     , dmcts-encoding
     , dmcts-knapsack
     , dmcts-runtime
     , hspec
+    , optparse-applicative
+    , random
+    , statistics
+    , transformers
+  default-language: Haskell2010
+
+executable dmcts-knapsack-runtime
+  main-is: Main.hs
+  other-modules:
+      Paths_dmcts_knapsack
+  hs-source-dirs:
+      runtime
+  default-extensions: RecordWildCards OverloadedLists OverloadedStrings DeriveGeneric
+  ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
+  build-tool-depends:
+      hspec-discover:hspec-discover ==2.*
+  build-depends:
+      aeson
+    , aws-lambda-haskell-runtime >=4.1.0
+    , base >=4.7 && <5
+    , criterion
+    , dmcts-encoding
+    , dmcts-knapsack
+    , dmcts-runtime
+    , hspec
+    , optparse-applicative
+    , random
+    , statistics
+    , transformers
   default-language: Haskell2010
 
 test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      DMCTSKnapsack.KnapTreeSpec
+      DMCTSKnapsack.ParsersSpec
+      ExampleTrees
       Paths_dmcts_knapsack
   hs-source-dirs:
       test
@@ -72,8 +110,14 @@ test-suite spec
       aeson
     , aws-lambda-haskell-runtime >=4.1.0
     , base >=4.7 && <5
+    , criterion
     , dmcts-encoding
+    , dmcts-knapsack
     , dmcts-runtime
     , hspec ==2.*
+    , optparse-applicative
+    , random
+    , statistics
+    , transformers
   default-language: Haskell2010
   build-tool-depends: hspec-discover:hspec-discover == 2.*

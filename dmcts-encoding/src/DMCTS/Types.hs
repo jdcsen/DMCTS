@@ -7,6 +7,8 @@ import Data.Aeson
 import Data.Tree
 import System.Random
 
+import Network.HTTP.Client
+
 -- Defines required methods for nodes in our Monte Carlo Search Tree.
 -- NOTE: I've set up the functional dependencies to pin label and weight to a
 --       specific set of logic. There are opposing forces within the software
@@ -33,8 +35,8 @@ type WeightTree a = Tree a
 
 -- Our DMCTS Runtime supports a number of different sampling methods
 data SampMethodE =
-  AvgLeaf  |
-  AvgSpine deriving (Enum, Show, Generic, Eq)
+  SampLeaf  |
+  SampSpine deriving (Enum, Show, Generic, Eq)
 
 instance FromJSON SampMethodE
 instance ToJSON SampMethodE
@@ -46,6 +48,18 @@ data DMCTSRequest label = DMCTSRequest { method   :: SampMethodE
                                        , randSeed :: Int
                                        } deriving (Show, Generic)
 
--- TODO: Add a minNode and a maxNode?
-newtype DMCTSResponse label weight = DMCTSResponse { result :: weight
-                                                   } deriving (Show, Generic)
+newtype DMCTSResponse weight = DMCTSResponse { result :: weight
+                                             } deriving (Show, Generic)
+
+-- The configuration for the DMCTS client. As is, only holds the URL of the API
+-- end point. Could hold authentication information in the future.
+data DMCTSLambdaConfig = DMCTSLambdaConfig { url            :: String
+                                           , sampsPerLambda :: Int
+                                           } deriving (Show, Generic)
+
+data DMCTSClientState = DMCTSClientState { lambdaConfig :: DMCTSLambdaConfig
+                                         , httpManager  :: Manager
+                                         }
+
+instance FromJSON DMCTSLambdaConfig
+instance ToJSON DMCTSLambdaConfig

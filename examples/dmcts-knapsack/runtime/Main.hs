@@ -5,7 +5,7 @@ import qualified System.IO as SIO
 import Aws.Lambda
 import DMCTS.Handlers
 
-import KnapTree
+import DMCTSKnapsack.KnapTree
 
 main :: IO ()
 main = do
