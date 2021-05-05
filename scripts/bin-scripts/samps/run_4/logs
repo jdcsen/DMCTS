@@ -1,0 +1,162 @@
+benchmarking Local/benchmark_samp_2
+analysing with 1000 resamples
+bootstrapping with 42 of 87 samples (48%)
+time                 451.1 μs   (441.0 μs .. 462.1 μs)
+                     0.991 R²   (0.974 R² .. 1.000 R²)
+mean                 445.1 μs   (439.5 μs .. 467.6 μs)
+std dev              33.94 μs   (8.220 μs .. 76.24 μs)
+found 4 outliers among 42 samples (9.5%)
+  1 (2.4%) low mild
+  1 (2.4%) high mild
+  2 (4.8%) high severe
+variance introduced by outliers: 65% (severely inflated)
+
+benchmarking Local/benchmark_samp_11
+analysing with 1000 resamples
+bootstrapping with 34 of 39 samples (87%)
+time                 5.218 ms   (4.640 ms .. 5.970 ms)
+                     0.790 R²   (0.648 R² .. 0.955 R²)
+mean                 5.816 ms   (5.410 ms .. 6.539 ms)
+std dev              1.599 ms   (1.004 ms .. 2.547 ms)
+found 7 outliers among 34 samples (20.6%)
+  1 (2.9%) low mild
+  1 (2.9%) high mild
+  5 (14.7%) high severe
+variance introduced by outliers: 92% (severely inflated)
+
+benchmarking Local/benchmark_samp_101
+analysing with 1000 resamples
+bootstrapping with 13 of 13 samples (100%)
+time                 53.32 ms   (52.14 ms .. 55.14 ms)
+                     0.998 R²   (0.995 R² .. 1.000 R²)
+mean                 52.77 ms   (52.29 ms .. 53.39 ms)
+std dev              1.082 ms   (813.4 μs .. 1.535 ms)
+variance introduced by outliers: 7% (slightly inflated)
+
+benchmarking Local/benchmark_samp_1001
+analysing with 1000 resamples
+bootstrapping with 5 of 5 samples (100%)
+time                 274.3 ms   (265.4 ms .. 284.1 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 266.7 ms   (264.1 ms .. 270.1 ms)
+std dev              3.886 ms   (2.126 ms .. 5.465 ms)
+variance introduced by outliers: 16% (moderately inflated)
+
+benchmarking Local/benchmark_samp_10001
+measurement took 44.24 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 2.900 s    (2.730 s .. 2.973 s)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 2.963 s    (2.930 s .. 2.979 s)
+std dev              32.23 ms   (767.1 μs .. 39.42 ms)
+found 1 outliers among 4 samples (25.0%)
+  1 (25.0%) low mild
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Local/benchmark_samp_100001
+measurement took 338.4 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 22.35 s    (NaN s .. 23.03 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 22.55 s    (22.37 s .. 22.67 s)
+std dev              181.2 ms   (72.83 ms .. 239.7 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Local/benchmark_samp_1000001
+
+
+measurement took 3651 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 284.4 s    (217.0 s .. 343.9 s)
+                     0.990 R²   (0.990 R² .. 1.000 R²)
+mean                 233.4 s    (213.8 s .. 253.2 s)
+std dev              25.02 s    (12.97 s .. 30.77 s)
+variance introduced by outliers: 23% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_2
+measurement took 129.9 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 8.718 s    (8.305 s .. 9.001 s)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 8.761 s    (8.698 s .. 8.834 s)
+std dev              77.38 ms   (32.69 ms .. 107.8 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_11
+measurement took 119.5 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 8.185 s    (7.777 s .. 9.006 s)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 7.908 s    (7.826 s .. 8.055 s)
+std dev              147.3 ms   (9.567 ms .. 180.4 ms)
+found 1 outliers among 4 samples (25.0%)
+  1 (25.0%) high mild
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_101
+measurement took 352.7 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 23.27 s    (22.86 s .. 23.78 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 23.74 s    (23.51 s .. 24.17 s)
+std dev              408.5 ms   (38.77 ms .. 508.0 ms)
+found 1 outliers among 4 samples (25.0%)
+  1 (25.0%) high mild
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_1001
+measurement took 1031 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 68.73 s    (67.02 s .. 70.80 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 68.36 s    (67.22 s .. 68.85 s)
+std dev              804.2 ms   (225.2 ms .. 1.033 s)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_10001
+measurement took 8074 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 563.0 s    (534.4 s .. 594.9 s)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 536.8 s    (525.6 s .. 547.5 s)
+std dev              12.88 s    (5.166 s .. 16.83 s)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_100001
+
+
+
+^[[A^[[A^[[Bmeasurement took 5053 s
+analysing with 1000 resamples
+bootstrapping with 4 of 4 samples (100%)
+time                 346.6 s    (280.2 s .. 424.2 s)
+                     0.994 R²   (0.980 R² .. 1.000 R²)
+mean                 317.3 s    (299.3 s .. 333.1 s)
+std dev              21.93 s    (9.094 s .. 27.29 s)
+variance introduced by outliers: 20% (moderately inflated)
+
+benchmarking Remote/benchmark_samp_1000001
+dmcts-knapsack-client: HttpExceptionRequest Request {
+  host                 = ".execute-api.us-west-1.amazonaws.com"
+  port                 = 443
+  secure               = True
+  requestHeaders       = [("Content-Type","application/json; charset=utf-8")]
+  path                 = "/api/DMCTS"
+  queryString          = ""
+  method               = "POST"
+  proxy                = Nothing
+  rawBody              = False
+  redirectCount        = 10
+  responseTimeout      = ResponseTimeoutDefault
+  requestVersion       = HTTP/1.1
+}
+ ConnectionTimeout
+

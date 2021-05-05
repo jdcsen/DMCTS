@@ -1,7 +1,5 @@
 module Main where
 
-import qualified System.IO as SIO
-
 import Aws.Lambda
 import DMCTS.Handlers
 
@@ -14,4 +12,4 @@ main = do
     options
     (pure ())
     id $ do
-      addAPIGatewayHandler "" (dmctsGatewayHandler KnapLogicNR)
+      addAPIGatewayHandler "" (dmctsGatewayHandler KnapLogicWR)

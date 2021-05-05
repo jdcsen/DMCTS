@@ -97,7 +97,7 @@ benchParser = Benchmark
          <> short 'b'
          <> metavar "NUM-BENCHMARKS"
          <> showDefault
-         <> value 7
+         <> value 6
          <> help "The number of benchmarks to execute. Benchmark samples are calculated by MIN-SAMPLE+EXP_SAMPLE_BASE^(sample number)")
       <*> option auto
           ( long "num-runs"

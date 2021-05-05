@@ -1,28 +1,27 @@
 # dmcts-runtime
 
-The DMCTS Runtime provides functionality to evaluate and accumulate the MCTS from a specified root node.
+The DMCTS Runtime provides functionality to evaluate and accumulate the MCTS from a specified root node. Currently, users must deploy a main function of the form:
 
-## Application Software Interface
-Currently, the dmcts-runtime retrieves branching and value information from an application specific software layer through a simple I/O stream interface. The interface is defined through simple key:value commands, all terminated with a newline. The software must:
+```
+module Main where
 
-* Start by running an executable located at '/DMCTS/app'
-* Read key:value commands from stdin
-* Print key:value responses to stdout
-* Return an exit code of 0 when run successfully, and return an error code otherwise.
+import Aws.Lambda
+import DMCTS.Handlers
 
-The commands the application software must support are:
-### NOTE: Commands with required arguments are denoted with "<>", commands with optional arguments are denoted with "[]"
+import -- APPLICATION SPECIFIC LOGIC --
 
-### Required Commands
-* PARENT:<node-string>
-	* Queried by the dmcts-runtime to determine the branching behavior of the Monte Carlo Tree at the specified node. The application software must respond with zero or more CHILD responses, terminated with a ENDCHILDLIST response.
-* GETVALUE:<node-string>
-	* Queried by the dmcts-runtime to determine the value of the specified node. The application software must respond with a single VALUE.
+main :: IO ()
+main = do
+  let options = defaultDispatcherOptions
+  runLambdaHaskellRuntime
+    options
+    (pure ())
+    id $ do
+      addAPIGatewayHandler "" (dmctsGatewayHandler --NODE LOGIC--)
 
-### Required Responses
-* CHILD:<node-string>
-	* Returned as a response to a PARENT command. Represents a single child of the node passed in PARENT. All child nodes are returned as individual CHILD responses.
-* ENDCHILDLIST:<parent-node-string>
-	* Returned when the application software is finished listing the children of the specified parent node.
-* VALUE:[float]
-	* Returned as a response to a GETVALUE command. Note: the float returned must be parsable by the Haskell "read" function. If a node's value should not be included in the final average returned to the caller, return an empty VALUE (i.e: "VALUE:\n")
+```
+
+This defines the main function to be the default aws-lambda-haskell-runtime dispatcher, with a single, unnamed handler that processes DMCTSRequests and returns DMCTSResponses.
+
+## Future Work:
+It seems like a natural extension to have a main function dynamically call a gatewayHandler based upon whatever logic is specified in a DMCTSRequest, so users can define a runtime that can handle a variety of search semantics depending on how it's commanded.
